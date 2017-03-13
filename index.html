@@ -2,92 +2,147 @@
 <html lang="en">
 <head>
 
-<meta charset="utf-8" />
-<meta name="handheldfriendly" content="true" />
-<meta name="mobileoptimized"  content="width" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="OpenSiteMobile makes open source software for building fast, robust, and adaptable responsive web apps or sites.">
-<meta name="keywords" content="responsive website software, responsive site software, responsive grid, responsive grid software, grid software, css3, html5, javascript, mobile software, open source, website software" />
-<meta name="author" content="Dwight Vietzke" />
-<meta name="msvalidate.01" content="643AAC9E9165257D45DCF7F890BF0DFB" />
-<meta name="google-site-verification" content="8u-3lQ6_tYqx560wOzfT0hXXWrO7VWhnIgaFQ8yc_94" />
+	<meta charset="utf-8" />
+	<meta name="handheldfriendly" content="true" />
+	<meta name="mobileoptimized"  content="width" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="OpenSiteMobile makes open source software for building fast, robust, and adaptable responsive web apps or sites.">
+	<meta name="keywords" content="responsive website software, responsive site software, responsive grid, responsive grid software, grid software, css3, html5, javascript, mobile software, open source, website software" />
+	<meta name="author" content="Dwight Vietzke" />
+	<meta name="msvalidate.01" content="643AAC9E9165257D45DCF7F890BF0DFB" />
+	<meta name="google-site-verification" content="8u-3lQ6_tYqx560wOzfT0hXXWrO7VWhnIgaFQ8yc_94" />
 
     <title>OpenSiteMobile</title>
 
-<style type="text/css">
-/* <![CDATA[ */
+	<style>
+		/*
+		 *	Note: Using an external file is fine, but it is best to leave this css here!
+		 *	This prevents a "blank page" showing on slow connections.
+		*/
+		html, body, table, div, article, section, fieldset {
+			font-family: "Comic Sans MS", cursive, sans-serif
+		}
+		html, body {
+			background-color: #A1A1A1;
+		}
+		body {
+			background-image: url(./mobilesiteos/images/grid_bg.png);
+			background-repeat: repeat-x;
+		}
+		#body {
+			display: none;
+			visibility: hidden;
+		}
 
-	/*
-	 *	Note: Using an external file is fine, but it is best to leave this css here!
-	 *	This prevents a "blank page" showing on slow connections.
-	*/
-	html, body, table, div, article, section, fieldset {
-		font-family: "Comic Sans MS", cursive, sans-serif
-	}
-	html, body {
-		background-color: #A1A1A1;
-	}
-	body {
-		background-image: url(./mobilesiteos/images/grid_bg.png);
-		background-repeat: repeat-x;
-	}
-	#body {
-		display: none;
-		visibility: hidden;
-	}
+		/* Std MSOS CSS: notify popup */
+		#notify_container {
+			position: absolute;
+			width: 18em;
+			z-index: 9999;
+		}
+		.notify {
+			background-color: #111;
+			border-radius: 0.4em;
+			margin-bottom: 1em;
+			opacity: 0.9;
+			padding: 1.2em;
+		}
+		.notify:hover {
+			opacity: 1;
+		}
+		.notify_title {
+			font-weight: bold;
+		}
+		.notify_title,
+		.notify_msg {
+			color: #FFF;
+			font-size: larger;
+			margin-bottom: 0.4em;
+			padding: 0 0.4em;
+		}
+		.notify > i {
+			float: left;
+		}
+		.notify_display > button {
+			float: right;
+		}
+		.notify > i.info {
+			color: blue;
+		}
+		.notify > i.warning {
+			color: yellow;
+		}
+		.notify > i.error {
+			color: red;
+		}
+		.notify > i.success {
+			color: green;
+		}
+		.notify > i.loading {
+			color: orange;
+		}
+		.notify {
+			-webkit-box-shadow: 0 0 12px #999;
+					box-shadow: 0 0 12px #999;
+		}
+		.notify:hover {
+			-webkit-box-shadow: 0 0 12px #000;
+					box-shadow: 0 0 12px #000;
+		}
 
-	#no_javascript {
-		background-color: #FFF;
-		border: 2px solid #999;
-		border-radius: 0.4em;
-		margin-left: auto;
-		margin-right: auto;
-		width: 60%;
-	}
-	#no_javascript > i {
-		color: red;
-	}
+		/* Std MSOS CSS: No JavaScript message */
+		#no_javascript {
+			background-color: #FFF;
+			border: 2px solid #999;
+			border-radius: 0.4em;
+			margin-left: auto;
+			margin-right: auto;
+			width: 60%;
+		}
+		#no_javascript > i {
+			color: red;
+		}
+	</style>
 
-/* ]]> */
-</style>
+	<link rel='stylesheet' type='text/css' href="./mobilesiteos/pages/css/specific.css" media='all' />
+	<link rel='shortcut icon' href='./mobilesiteos/images/osm.ico' />
 
-<link rel='stylesheet' type='text/css' href="./mobilesiteos/pages/css/specific.css" media='all' />
-<link rel='shortcut icon' href='./mobilesiteos/images/osm.ico' />
-
-<script src="./mobilesiteos/msos/base.min.js"></script>
-<script>
-// Start up our MSOS Page App
-msos.onload_func_pre.push(
-	function () {
-
-		// Load the Page App
-		msos.require("msos.page");
-
-		// Load the #header and #footer html
-		msos.template("pages.tmpl.header");
-		msos.template("pages.tmpl.footer");
-
-		// Define namespace for page content and header/footer templates
-		msos.onload_func_post.push(
+	<script src="./mobilesiteos/msos/base.min.js"></script>
+	<script>
+		// Start up our MSOS Page App
+		msos.onload_func_pre.push(
 			function () {
-				var app_config = {
-						root: { base: '', group: 'pages', name: 'home' },	// ./pages/home.js is default page script
-						header: pages.tmpl.header,
-						footer: pages.tmpl.footer,
-						template: 'tmpl',									// is template folder name (ie: ./pages/tmpl/home.html)
-						images_url: msos.resource_url('pages', 'images')
-					};
 
-				msos.page.initiate(app_config);
+				// Load the Page App
+				msos.require("msos.page");
 
-				// Mask the initial page building process (its ugly due lapse between header/footer and content)
-				setTimeout(function () { jQuery('#body').css('visibility', 'visible'); }, 250);
+				// Load the #header and #footer html
+				msos.template("pages.tmpl.header");
+				msos.template("pages.tmpl.footer");
+
+				// Define namespace for page content and header/footer templates
+				msos.onload_func_post.push(
+					function () {
+						var purl_obj = msos.purl(),
+							app_config = {
+								root: { base: '', group: 'pages', name: 'home' },	// ./pages/home.js is default page script
+								header: pages.tmpl.header,
+								footer: pages.tmpl.footer,
+								template: 'tmpl',									// is template folder name (ie: ./pages/tmpl/home.html)
+								images_url: msos.resource_url('pages', 'images'),
+								site_url: purl_obj.attr('protocol') + '://' + purl_obj.attr('host')
+							};
+
+						msos.page.initiate(app_config);
+
+						// Mask the initial page building process (its ugly due lapse between header/footer and content)
+						setTimeout(function () { jQuery('#body').css('visibility', 'visible'); }, 250);
+					}
+				);
 			}
 		);
-	}
-);
-</script>
-<script src="./mobilesiteos/config.js"></script>
+	</script>
+	<script src="./mobilesiteos/config.js"></script>
 
 </head>
 <body>

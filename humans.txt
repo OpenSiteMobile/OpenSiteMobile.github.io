@@ -17,7 +17,7 @@
 
 # SITE
 
-    Last update: Date 4-14-2014
+    Last update: Date 3-12-2017
     Language: English
     Doctype: HTML5
 
@@ -25,6 +25,6 @@
 # TECHNOLOGY COLOPHON
 
     Standards: HTML5, CSS3
-    Components: Modernizr, jQuery, jQueryUI, UnderscoreJS, Mobile-BoilerPlate, Bootstrap, BackboneJS
+    Components: Modernizr, jQuery, jQueryUI, UnderscoreJS, AngularJS, Bootstrap, BackboneJS
     Software: MobileSiteOS
-    Programming Languages: JavaScript, Perl
+    Programming Languages: JavaScript
