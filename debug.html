@@ -106,6 +106,7 @@
 		// Start up our MSOS Page App
 		msos.onload_func_pre.push(
 			function () {
+				"use strict";
 
 				// Load the Page App
 				msos.require("msos.page");
@@ -128,14 +129,10 @@
 							};
 
 						msos.page.initiate(app_config);
-
-						// Mask the initial page building process (its ugly due lapse between header/footer and content)
-						setTimeout(function () { jQuery('#body').css('visibility', 'visible'); }, 250);
 					}
 				);
 			}
 		);
-
 	</script>
 	<script defer src="./mobilesiteos/config.js"></script>
 
